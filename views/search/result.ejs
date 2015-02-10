@@ -1,0 +1,20 @@
+<div class="section intro">
+	<h1 class="intro__heading"><span>Search for ”<%= query %>”</span></h1>
+</div>
+
+<div class="section">
+	<ul class="game-gallery">
+	<% games.forEach(function (game) { %>
+		<li class="game-gallery__item">
+			<a href="/game/<%= game.id %>" class="game-gallery__game">
+				<h3 class="game-gallery__heading heading--4"><%= game.name.value %></h3>
+				<div class="game-gallery__thumb  thumbnail">
+					<div class="thumbnail__inner" style="background-image:url(<%= game.thumbnail %>)">
+						<img class="thumbnail__image" src="<%= game.thumbnail %>" alt="">
+					</div>
+				</div>
+			</a>
+		</li>
+	<% }) %>
+	</ul>
+</div>

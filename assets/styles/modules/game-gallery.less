@@ -1,0 +1,28 @@
+/* 1. Fix for spacing between items */
+.game-gallery {
+	display: flex;
+	flex-wrap:wrap;
+	justify-content: space-between;
+	margin:-10px -5px; /* [1] */
+}
+
+.game-gallery__item {
+	box-sizing: border-box;
+	padding: 10px 5px;
+	width: 33.3333%;
+}
+
+.game-gallery__game {
+	display: flex;
+	flex-direction: column;
+}
+
+.game-gallery__heading {
+	order:20;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.game-gallery__thumb {
+	order:10;
+}
