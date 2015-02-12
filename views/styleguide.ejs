@@ -3,6 +3,16 @@
 </div>
 
 <div class="section">
+	<h2 class="heading heading--2">Thumbnail</h2>
+</div>
+
+<div class="thumbnail">
+	<div class="thumbnail__inner" style="background-image:url(http://cf.geekdo-images.com/images/pic2211846_t.png)">
+		<img class="thumbnail__image" src="http://cf.geekdo-images.com/images/pic2211846_t.png" alt="">
+	</div>
+</div>
+
+<div class="section">
 	<h2 class="heading heading--2">Game list</h2>
 </div>
 
@@ -41,3 +51,9 @@
 		<% } %>
 	</ul>
 </div>
+
+<%- partial('partials/game-intro.ejs', {
+	heading: 'The Golden Ages',
+	background: 'http://cf.geekdo-images.com/images/pic2211846_t.png',
+	thumbnail: 'http://cf.geekdo-images.com/images/pic2211846_t.png'
+}) %>

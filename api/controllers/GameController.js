@@ -5,7 +5,8 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-bgg = require('bgg');
+var bgg = require('bgg');
+var BggGame = require('../wrappers/bgg-game');
 
 module.exports = {
 
@@ -20,23 +21,10 @@ module.exports = {
 		bgg('thing', { id: req.param('id') })
 			.then(function (result) {
 				if (result.items.item) {
-					var item = result.items.item;
-					var name = '';
-
-					// For games with alternate names
-					if (Object.prototype.toString.call(item.name) === '[object Array]') {
-						name = item.name[0].value;
-					}
-					// For games with just a primary name
-					else {
-						name = item.name.value;
-					}
+					var game = new BggGame(result.items.item);
 
 					res.view('game/details', {
-						game: {
-							name: name,
-							image: item.image
-						}
+						game: game
 					});
 				}
 				else {

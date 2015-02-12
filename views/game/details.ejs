@@ -1,3 +1,5 @@
-<div class="section intro" style="background-image:url(<%= game.image %>)">
-	<h1 class="intro__heading"><span><%= game.name %></span></h1>
-</div>
+<%- partial('../partials/game-intro.ejs', {
+	heading: game.name,
+	background: game.thumbnail,
+	thumbnail: game.image
+}) %>
