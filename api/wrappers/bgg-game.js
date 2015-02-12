@@ -48,6 +48,11 @@ BggGame.prototype = {
 	get thumbnail () {
 		this.data.thumbnail = this.data.thumbnail || this.rawdata.thumbnail;
 		return this.data.thumbnail;
+	},
+
+	get year () {
+		this.data.yearpublished = this.data.yearpublished || this.rawdata.yearpublished.value;
+		return this.data.yearpublished;
 	}
 };
 
