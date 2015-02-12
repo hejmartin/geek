@@ -7,6 +7,19 @@
 
 var util = require('util');
 var bgg = require('bgg');
+var BggGame = require('../wrappers/bgg-game');
+
+function sortGamesByRank (a, b) {
+	if (a.rank) {
+		return b.rank ? b.rank - a.rank : -1;
+	}
+	else if (b.rank) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
 
 module.exports = {
 	search: function (req, res) {
@@ -25,18 +38,31 @@ module.exports = {
 
 				return bgg('thing', {
 					id: ids.join(','),
-					type: 'boardgame'
+					type: 'boardgame',
+					stats: 1
 				});
 			})
 				// Show results
 				.then(function (result) {
+					var games = [];
+
+					try {
+						if (_.isArray(result.items.item)) {
+							result.items.item.forEach(function (item) {
+								games.push(new BggGame(item));
+							});
+						}
+						else {
+							games.push(new BggGame(result.items.item));
+						}
+					} catch (e) {}
+
 					sails.log(util.inspect(result, {depth:null}));
 
-					// Make sure we're working with an array, even
-					// if just one game.
-					var games = [].concat(result.items.item);
+					//games = games.sort(sortGamesByRank);
 
 					res.view('search/result', {
+						title: ('”' + query + '”'),
 						query: query,
 						games: games
 					});
