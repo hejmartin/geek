@@ -4,16 +4,24 @@
  * @param {object} data Json object
  */
 function BggGame (rawdata) {
+	var self = this;
+
 	this.data = {};
 	this.rawdata = rawdata || {};
+
+	// Simple props
+	['description', 'thumbnail', 'image', 'id'].forEach(function (prop) {
+		Object.defineProperty(self, prop, {
+			get: function () {
+				sails.log('getting ' + prop);
+				self.data[prop] = self.data[prop] || self.rawdata[prop];
+				return self.data[prop];
+			}
+		});
+	});
 }
 
 BggGame.prototype = {
-	get id () {
-		this.data.id = this.data.id || this.rawdata.id;
-		return this.data.id;
-	},
-
 	get name () {
 		if (!this.data.name) {
 			if (_.isArray(this.rawdata.name)) {
@@ -45,19 +53,28 @@ BggGame.prototype = {
 		return this.data.rank;
 	},
 
-	get thumbnail () {
-		this.data.thumbnail = this.data.thumbnail || this.rawdata.thumbnail;
-		return this.data.thumbnail;
-	},
-
-	get image () {
-		this.data.image = this.data.image || this.rawdata.image;
-		return this.data.image;
-	},
-
 	get year () {
 		this.data.yearpublished = this.data.yearpublished || this.rawdata.yearpublished.value;
 		return this.data.yearpublished;
+	},
+
+	get designers () {
+		if (!this.data.designers) {
+			this.data.designers = [];
+
+			try {
+				this.data.designers = this.rawdata.link.filter(function (link) {
+					return link.type === 'boardgamedesigner';
+				}).map(function (link) {
+					return {
+						id: link.id,
+						name: link.value
+					};
+				});
+			} catch (e) {}
+		}
+
+		return this.data.designers;
 	}
 };
 

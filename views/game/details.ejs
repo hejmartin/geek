@@ -1,5 +1,6 @@
 <%- partial('../partials/game-intro.ejs', {
-	heading: game.name,
-	background: game.thumbnail,
-	thumbnail: game.image
+	game: game
 }) %>
+<div class="section">
+	<p><%= game.description %></p>
+</div>

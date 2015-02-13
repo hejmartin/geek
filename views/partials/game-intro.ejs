@@ -1,7 +1,14 @@
 <div class="section game-intro">
-	<h1 class="game-intro__heading heading heading--3"><%= heading %></h1>
+	<h1 class="game-intro__heading heading heading--3"><%= game.name %></h1>
+	<% if (game.designers.length) { %>
+		<p>by
+		<% game.designers.forEach(function (designer) { %>
+			<%= designer.name %>
+		<% }) %>
+		</p>
+	<% } %>
 	<div class="game-intro__image-wrapper">
-		<img class="game-intro__image" src="<%= thumbnail %>" alt="">
+		<img class="game-intro__image" src="<%= game.image %>" alt="">
 	</div>
-	<div class="game-intro__background" style="background-image:url(<%= background %>)"></div>
+	<div class="game-intro__background" style="background-image:url(<%= game.thumbnail %>)"></div>
 </div>
