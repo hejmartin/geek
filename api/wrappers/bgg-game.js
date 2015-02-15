@@ -3,6 +3,9 @@
  * Wrapper for BGG API json data
  * @param {object} data Json object
  */
+
+var entities = require('entities');
+
 function BggGame (rawdata) {
 	var self = this;
 
@@ -10,10 +13,9 @@ function BggGame (rawdata) {
 	this.rawdata = rawdata || {};
 
 	// Simple props
-	['description', 'thumbnail', 'image', 'id'].forEach(function (prop) {
+	['thumbnail', 'image', 'id'].forEach(function (prop) {
 		Object.defineProperty(self, prop, {
 			get: function () {
-				sails.log('getting ' + prop);
 				self.data[prop] = self.data[prop] || self.rawdata[prop];
 				return self.data[prop];
 			}
@@ -56,6 +58,18 @@ BggGame.prototype = {
 	get year () {
 		this.data.yearpublished = this.data.yearpublished || this.rawdata.yearpublished.value;
 		return this.data.yearpublished;
+	},
+
+	get description () {
+		if (!this.data.description) {
+			this.data.description = entities.decodeXML(
+				entities.decodeXML(
+					this.rawdata.description
+				)
+			);
+		}
+
+		return this.data.description;
 	},
 
 	get designers () {

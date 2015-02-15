@@ -32,12 +32,19 @@ module.exports = {
 		})
 			// Request more info about found games
 			.then(function (result) {
-				var ids = result.items.item.map(function (item) {
-					return item.id;
-				});
+				var id = [];
+
+				if (_.isArray(result.items.item)) {
+					id = result.items.item.map(function (item) {
+						return item.id;
+					});
+				}
+				else {
+					id = [result.items.item.id];
+				}
 
 				return bgg('thing', {
-					id: ids.join(','),
+					id: id.join(','),
 					type: 'boardgame',
 					stats: 1
 				});
@@ -57,7 +64,7 @@ module.exports = {
 						}
 					} catch (e) {}
 
-					sails.log(util.inspect(result, {depth:null}));
+					//sails.log(util.inspect(result, {depth:null}));
 
 					//games = games.sort(sortGamesByRank);
 
