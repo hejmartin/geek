@@ -20,6 +20,7 @@ module.exports = {
 				.then(function (game) {
 					if (game) {
 						res.view('game/details', {
+							title: game.title,
 							game: game
 						});
 					}

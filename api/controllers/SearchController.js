@@ -30,6 +30,9 @@ module.exports = {
 			query: query,
 			type: 'boardgame'
 		})
+			.catch(function (err) {
+				console.error(err);
+			})
 			// Request more info about found games
 			.then(function (result) {
 				var id = [];
