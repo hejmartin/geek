@@ -16,6 +16,7 @@ module.exports = {
 				.then(function (person) {
 					console.log(person);
 					res.view('person/details', {
+						title: person.name,
 						person: person
 					});
 				})
