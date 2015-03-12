@@ -1,0 +1,9 @@
+<h1><%= person.name %></h1>
+
+<% if (person.games) { %>
+	<ul>
+	<% person.games.forEach(function (game) { %>
+		<li><a href="/game/<%= game.id %>"><%= game.title %></a></li>
+	<% }) %>
+	</ul>
+<% } %>

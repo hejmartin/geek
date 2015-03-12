@@ -1,21 +1,21 @@
 <div class="section game-intro">
-	<h1 class="game-intro__heading heading heading--3"><%= game.name.replace(/\s(?=\S+$)/, '&nbsp;') %></h1>
+	<h1 class="game-intro__heading heading heading--3"><%= game.title.replace(/\s(?=\S+$)/, '&nbsp;') %></h1>
 	<% if (game.designers.length) { %>
 		<p class="game-intro__designers">by
 		<% game.designers.forEach(function (designer) { %>
-			<a href="https://www.boardgamegeek.com/boardgamedesigner/<%= designer.id %>">
+			<a href="/designer/<%= designer.id %>">
 				<%= designer.name %>
 			</a>
 		<% }) %>
 		</p>
 	<% } %>
 	<div class="game-intro__image-wrapper">
-		<img class="game-intro__image" src="<%= game.image %>" alt="">
+		<img class="game-intro__image" src="<%= game.imageUrl %>" alt="">
 	</div>
 	<% if (game.description) { %>
 		<div class="game-intro__description text">
 			<p><%- game.description.replace(/&#10;&#10;/g, '</p><p>') %></p>
 		</div>
 	<% } %>
-	<div class="game-intro__background" style="background-image:url(<%= game.thumbnail %>)"></div>
+	<div class="game-intro__background" style="background-image:url(<%= game.thumbnailUrl %>)"></div>
 </div>

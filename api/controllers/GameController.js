@@ -11,26 +11,36 @@ var BggGame = require('../wrappers/bgg-game');
 module.exports = {
 
 	index: function (req, res) {
-
 	},
 
 	details: function (req, res) {
-		sails.log('Requesting game with id: ' + req.param('id'));
-
-		// Fetch game data
-		bgg('thing', { id: req.param('id') })
-			.then(function (result) {
-				if (result.items.item) {
-					var game = new BggGame(result.items.item);
-
-					res.view('game/details', {
-						game: game
-					});
-				}
-				else {
+		if (req.param('id')) {
+			Game.findOne(req.param('id'))
+				.populate('designers')
+				.then(function (game) {
+					if (game) {
+						res.view('game/details', {
+							game: game
+						});
+					}
+					else {
+						res.notFound();
+					}
+				})
+				.catch(function (err) {
+					res.notFound();
+				});
+		}
+		else if (req.param('bggid')) {
+			Game.findByBggIdOrCreate(req.param('bggid'), function (err, game) {
+				if (err) {
 					res.notFound();
 				}
+				else {
+					res.redirect('/game/' + game.id);
+				}
 			});
+		}
 	}
 
 };

@@ -22,24 +22,40 @@
 
 module.exports.routes = {
 
-  '/': {view: 'homepage'},
-  '/styleguide': {view: 'styleguide'},
+	'get /login': 'AuthController.login',
+	'get /logout': 'AuthController.logout',
+	'get /register': 'AuthController.register',
 
-  // Search
-  '/search': 'SearchController.search',
+	'post /auth/local': 'AuthController.callback',
+	'post /auth/local/:action': 'AuthController.callback',
 
-  // Games
-  '/game/:id': 'GameController.details',
-  '/game/:id/:slug': 'GameController.details'
+	'get /auth/:provider': 'AuthController.provider',
+	'get /auth/:provider/callback': 'AuthController.callback',
 
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  *  If a request to a URL doesn't match any of the custom routes above, it  *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+	'/': {view: 'homepage'},
+	'/styleguide': {view: 'styleguide'},
+
+	// Search
+	'/search': 'SearchController.search',
+
+	// Games
+	'/game': 'GameController.index',
+	'/game/bgg/:bggid': 'GameController.details',
+	'/game/:id': 'GameController.details',
+	'/game/:id/:slug': 'GameController.details',
+
+	// Designers
+	'/designer/bgg/:bggid': 'PersonController.details',
+	'/designer/:id': 'PersonController.details',
+
+	/***************************************************************************
+	*                                                                          *
+	* Custom routes here...                                                    *
+	*                                                                          *
+	*  If a request to a URL doesn't match any of the custom routes above, it  *
+	* is matched against Sails route blueprints. See `config/blueprints.js`    *
+	* for configuration options and examples.                                  *
+	*                                                                          *
+	***************************************************************************/
 
 };

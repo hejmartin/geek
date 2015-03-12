@@ -6,7 +6,7 @@
 	<ul class="game-gallery">
 	<% games.forEach(function (game) { %>
 		<li class="game-gallery__item">
-			<a href="/game/<%= game.id %>" class="game-gallery__game">
+			<a href="/game/bgg/<%= game.id %>" class="game-gallery__game">
 				<h3 class="game-gallery__heading heading--4"><%= game.name %> (<%= game.year %>)</h3>
 				<div class="game-gallery__thumb  thumbnail">
 					<div class="thumbnail__inner" style="background-image:url(<%= game.thumbnail %>)">

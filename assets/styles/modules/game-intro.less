@@ -23,6 +23,10 @@
 	font:300 italic 16px/24px "expo-serif-pro", georgia, serif;
 }
 
+.game-intro__designers > a {
+	border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+}
+
 /* 1. Trick to avoid LESS calulating the values during compile */
 .game-intro__designers:before {
 	content:"";
@@ -33,9 +37,8 @@
 	border-bottom: 1px solid rgba(255, 255, 255, 0.85);
 }
 
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-resolution: 192dpi) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-resolution: 192dpi) {
 	.game-intro__designers:before {
 		border-bottom-width: 0.5px;
 	}
@@ -60,9 +63,8 @@ only screen and (min-resolution: 192dpi) {
 	border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-resolution: 192dpi) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-resolution: 192dpi) {
 .game-intro__image-wrapper:after {
 		border-width: 0.5px;
 	}
@@ -83,7 +85,7 @@ only screen and (min-resolution: 192dpi) {
 	left: -@blur;
 	z-index: 10;
 	max-height: 80%;
-	height: 700px;
+	height: 250px;
 	opacity: 0.3;
 	background: 50%/cover no-repeat;
 	-webkit-filter: blur(@blur);
